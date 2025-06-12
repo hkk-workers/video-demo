@@ -35,22 +35,6 @@
       padding: 10px;
       z-index: 1;
     }
-    .controls {
-      position: absolute;
-      bottom: 15px;
-      z-index: 2;
-      display: flex;
-      gap: 10px;
-    }
-    button {
-      padding: 8px 16px;
-      background: #0ea5e9;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -59,51 +43,22 @@
   <div class="section">
     <div class="label">🎬 업로드된 영상 (VOD)</div>
     <iframe 
-      id="vod-player"
       src="https://iframe.videodelivery.net/45fccfde7d0eaa0dac8d071d8113a70f?autoplay=true&muted=true&controls=false"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
       allowfullscreen>
     </iframe>
-    <div class="controls">
-      <button onclick="vodControl('play')">다시 재생</button>
-      <button onclick="vodControl('pause')">멈춤</button>
-    </div>
   </div>
 
   <!-- Live Section -->
   <div class="section">
     <div class="label">🔴 실시간 라이브 스트림</div>
     <iframe 
-      id="live-player"
-      src="https://iframe.videodelivery.net/f9ff9fa6be78eed36135c3b90787ee9b?autoplay=true&muted=true&controls=false"
+      src="https://iframe.videodelivery.net/f9ff9fa6be78eed36135c3b90787ee9b?autoplay=true&muted=true&controls=true"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
       allowfullscreen>
     </iframe>
-    <div class="controls">
-      <button onclick="liveControl('play')">재생</button>
-      <button onclick="liveControl('pause')">멈춤</button>
-    </div>
   </div>
-
-  <!-- JS Controls -->
-  <script>
-    function vodControl(action) {
-      const iframe = document.getElementById('vod-player');
-      iframe.contentWindow.postMessage({ event: action }, '*');
-    }
-
-    function liveControl(action) {
-      const iframe = document.getElementById('live-player');
-      iframe.contentWindow.postMessage({ event: action }, '*');
-    }
-
-    // 자동 멈춤도 유지
-    window.addEventListener('message', function(event) {
-      if (event.data.event === 'ended') {
-        vodControl('pause');
-      }
-    });
-  </script>
 
 </body>
 </html>
+
