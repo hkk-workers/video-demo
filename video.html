@@ -10,28 +10,55 @@
       background-color: black;
       width: 100%;
       height: 100%;
+      font-family: sans-serif;
+      color: white;
     }
-    #video-container {
-      width: 100vw;
-      height: 100vh;
+    .container {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .title {
+      padding: 10px;
+      font-size: 1.2rem;
+      background-color: #111;
+      text-align: center;
     }
     iframe {
+      flex: 1;
       width: 100%;
-      height: 100%;
       border: none;
     }
   </style>
 </head>
 <body>
-  <div id="video-container">
-    <iframe 
-      src="https://iframe.videodelivery.net/45fccfde7d0eaa0dac8d071d8113a70f?autoplay=true&muted=true&controls=false&loop=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" 
-      allowfullscreen>
-    </iframe>
+  <div class="container">
+    
+    <!-- 업로드된 영상 -->
+    <div class="section">
+      <div class="title">📁 업로드된 영상 (VOD)</div>
+      <iframe 
+        src="https://iframe.videodelivery.net/45fccfde7d0eaa0dac8d071d8113a70f?autoplay=true&muted=true&controls=false&loop=true"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen>
+      </iframe>
+    </div>
+    
+    <!-- 라이브 인풋 영상 -->
+    <div class="section">
+      <div class="title">🔴 라이브 스트림</div>
+      <iframe 
+        src="https://iframe.videodelivery.net/f9ff9fa6be78eed36135c3b90787ee9b?autoplay=true&muted=true"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen>
+      </iframe>
+    </div>
+
   </div>
 </body>
 </html>
