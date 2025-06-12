@@ -16,38 +16,34 @@
       width: 100vw;
       height: 50vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      border-bottom: 2px solid #111;
+      justify-content: flex-start;
+      position: relative;
     }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
-    h2 {
-      position: absolute;
-      margin: 1rem;
-      color: white;
-      background: rgba(0,0,0,0.5);
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      z-index: 10;
-      font-size: 1.5rem;
-    }
     .label {
-      position: absolute;
-      top: 10px;
-      left: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.4rem;
+      color: white;
+      background: #111;
+      padding: 10px;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
 
-  <!-- VOD Section (1번만 재생) -->
+  <!-- VOD Section -->
   <div class="section">
-    <h2 class="label">🎬 업로드된 영상 (VOD)</h2>
+    <div class="label">🎬 업로드된 영상 (VOD)</div>
     <iframe 
+      id="vod-player"
       src="https://iframe.videodelivery.net/45fccfde7d0eaa0dac8d071d8113a70f?autoplay=true&muted=true&controls=false"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
       allowfullscreen>
@@ -56,7 +52,7 @@
 
   <!-- Live Section -->
   <div class="section">
-    <h2 class="label">🔴 실시간 라이브 스트림</h2>
+    <div class="label">🔴 실시간 라이브 스트림</div>
     <iframe 
       src="https://iframe.videodelivery.net/f9ff9fa6be78eed36135c3b90787ee9b?autoplay=true&muted=true&controls=false"
       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
@@ -64,6 +60,16 @@
     </iframe>
   </div>
 
+  <!-- Stop VOD after first play -->
+  <script>
+    window.addEventListener('message', function(event) {
+      const data = event.data;
+      if (data.event === 'ended') {
+        const iframe = document.getElementById('vod-player');
+        iframe.contentWindow.postMessage({ event: 'pause' }, '*');
+      }
+    });
+  </script>
+
 </body>
 </html>
-
